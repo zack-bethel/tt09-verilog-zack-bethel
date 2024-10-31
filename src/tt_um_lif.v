@@ -27,6 +27,6 @@ module tt_um_lif (
 
   //instantiate LIF neuron
   lif lif1 (.current(ui_in),.clk (clk), .reset_n(rst_n) , .state(uo_out), .spike(uio_out[7]));
-  // lif lif2 (.current(ui_in),.clk (clk), .reset_n(rst_n) , .state(uo_out), .spike(uio_out[7]));
+  // lif lif2 (.current({uio_out[7], 7'b00000000}),.clk (clk), .reset_n(rst_n) , .state(uo_out), .spike(uio_out[7])); // need new state and spike reg
     
 endmodule
