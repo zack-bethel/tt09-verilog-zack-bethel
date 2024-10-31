@@ -9,7 +9,7 @@ module lif(
 
     )
 
-    wire[7:0] next_state;
+    wire [7:0] next_state;
     reg [7:0] threshold;
     // reg [7:0] beta;
 
@@ -30,5 +30,5 @@ module lif(
 
     //spiking logic
     assign spike = (state >= threshold);
-    
+
 endmodule
