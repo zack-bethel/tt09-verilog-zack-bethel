@@ -20,15 +20,17 @@ module lif(
             threshold <= 200;
             // beta <= 8'b00000010;
         end else begin
-            staet <= next_state;
+            state <= next_state;
         end 
     end
 
     // assign next state
     // assign next_state = curent + beta*state
-    assign next_state = curent + (state >> 1);
+    // assign next_state = curent + (state >> 1);
+    assign next_state = current + (spk ? 0 : (state >> 1));
 
     //spiking logic
     assign spike = (state >= threshold);
+
 
 endmodule
