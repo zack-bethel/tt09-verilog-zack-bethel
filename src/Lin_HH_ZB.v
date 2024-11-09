@@ -4,7 +4,7 @@ module LinearHodgkinHuxleyModel (
     input wire [15:0] current_in,          // Multiplexed input for I (current)
     input wire [15:0] dt,               // and dt (time step)
     output reg [15:0] data_out         // Output for membrane potential V
-);
+    );
 
     // Internal variables
     reg [1:0]           state, next_state;

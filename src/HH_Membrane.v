@@ -6,7 +6,7 @@ module MembranePotential (
     input wire [15:0]           dt,       // Time step for integration
     input wire [15:0]           V,        // Current membrane potential
     output reg signed [15:0]    V_next    // Next membrane potential (feedback output)
-);
+    );
     // Internal constants
     reg [15:0] I_Na, I_K, I_L, CM, G_NA, G_K, G_L, E_NA, E_K, E_L;
 

@@ -6,7 +6,7 @@ module GatingVariable (
     output reg [15:0] g_next,   // Next gating variable value
     parameter real A0 = 0.0,    // Parameter for alpha calculation
     parameter real B0 = 0.0     // Parameter for beta calculation
-);
+    );
     reg [15:0] alpha, beta;
 
     // Update gating variable using discrete differential equation
