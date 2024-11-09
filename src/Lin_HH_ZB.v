@@ -19,7 +19,7 @@ module LinearHodgkinHuxleyModel (
     parameter STATE_CALCULATE_V = 2'b10;
     parameter STATE_OUTPUT_V = 2'b11;
 
-    state = STATE_INIT;
+    state <= STATE_INIT;
 
     always @(posedge clk) begin
         if (reset || state == STATE_INIT) begin
