@@ -3,7 +3,7 @@ module LinearHodgkinHuxleyModel (
     input wire reset,                     // Reset input
     input wire [15:0] current_in,          // Multiplexed input for I (current)
     input wire [15:0] dt,               // and dt (time step)
-    output reg [15:0] data_out,         // Output for membrane potential V
+    output reg [15:0] data_out         // Output for membrane potential V
 );
 
     // Internal variables
@@ -33,7 +33,7 @@ module LinearHodgkinHuxleyModel (
             if (state == STATE_READ) begin
                 // Update the feedback values
                 // Membrane Potential Calculation (using gating variables with feedback)
-                MembranePotential mem_pot ( .clk(clock),
+                MembranePotential mem_pot (.clk(clock),
                                             .rst(reset),
                                             .I(current_in),
                                             .m(m),
@@ -76,7 +76,7 @@ module LinearHodgkinHuxleyModel (
             end             
         end
         if (state == STATE_OUTPUT_V) begin
-            assign data_out <= V;  // Output the calculated membrane potential
+            assign data_out = V;  // Output the calculated membrane potential
             state <= STATE_READ;
         end
     end
