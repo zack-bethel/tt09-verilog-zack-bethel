@@ -7,17 +7,17 @@ module LinearHodgkinHuxleyModel (
 );
 
     // Internal variables
-    reg [1:0]           state, next_state, STATE_INIT, STATE_READ, STATE_CALCULATE_V, STATE_OUTPUT_V;
+    reg [1:0]           state, next_state;
     reg signed [15:0]   V, V_next;      // Membrane potential with feedback
     reg [15:0]          m, m_next;      // Sodium gating variable with feedback
     reg [15:0]          h, h_next;      // Potassium gating variable with feedback
     reg [15:0]          n, n_next;      // Leak gating variable with feedback
 
     // FSM States
-    STATE_INIT <= 2'b00;
-    STATE_READ = 2'b01;
-    STATE_CALCULATE_V = 2'b10;
-    STATE_OUTPUT_V = 2'b11;
+    parameter STATE_INIT = 2'b00;
+    parameter STATE_READ = 2'b01;
+    parameter STATE_CALCULATE_V = 2'b10;
+    parameter STATE_OUTPUT_V = 2'b11;
 
     state = STATE_INIT;
 
