@@ -14,7 +14,7 @@ module LinearHodgkinHuxleyModel (
     reg [15:0]          n, n_next;      // Leak gating variable with feedback
 
     // FSM States
-    STATE_INIT = 2'b00;
+    STATE_INIT <= 2'b00;
     STATE_READ = 2'b01;
     STATE_CALCULATE_V = 2'b10;
     STATE_OUTPUT_V = 2'b11;
