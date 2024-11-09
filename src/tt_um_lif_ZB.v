@@ -23,10 +23,13 @@ module tt_um_lif_ZB (
 
   // List all unused inputs to prevent warnings
   // wire _unused = &{ena, clk, rst_n, 1'b0};
-  wire _unused = &{ena, uio_in, 1'b0};
+  wire _unused = &{ena, uio_out, uio_oe, 1'b0};
 
   //instantiate LIF neuron
-  lif lif1 (.current(ui_in),.clk (clk), .reset_n(rst_n) , .state(uo_out), .spike(uio_out[7]));
+  // lif lif1 (.current(ui_in),.clk (clk), .reset_n(rst_n) , .state(uo_out), .spike(uio_out[7]));
   // lif lif2 (.current({uio_out[7], 7'b00000000}),.clk (clk), .reset_n(rst_n) , .state(uo_out), .spike(uio_out[7])); // need new state and spike reg
-    
+
+  //instantiate Linear HH neuron
+  LinearHodgkinHuxleyModel HH1 (.clock(clk), .reset(rst_n), .current_in(ui_in), .dt(uio_in), .data_out(uo_out));
+
 endmodule
