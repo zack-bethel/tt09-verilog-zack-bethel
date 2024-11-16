@@ -1,8 +1,8 @@
 module update_h (
-    input real V,       // Membrane potential (in mV)
-    input real h,       // Current gating variable value
-    input real dt,      // Time step (in ms)
-    output real h_next  // Updated gating variable value
+    input wire V,       // Membrane potential (in mV)
+    input wire h,       // Current gating variable value
+    input wire dt,      // Time step (in ms)
+    output wire h_next  // Updated gating variable value
 );
 
     // Internal variables for alpha_h, beta_h, and dh/dt

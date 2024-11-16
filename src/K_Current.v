@@ -1,4 +1,4 @@
-module sodiumCurrent (
+module potassiumCurrent (
     input wire          clk,
     input wire          rst,
     input wire [15:0]   V,        // Current membrane potential

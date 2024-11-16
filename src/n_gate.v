@@ -13,7 +13,7 @@ module update_m(
     // Assign output to the register value
     assign n = n_reg;
 
-    // Compute alpha_m and beta_m based on membrane potential V
+    // Compute alpha_n and beta_n based on membrane potential V
     always @(posedge clk) begin
         if (V != -55) begin
             alpha_n = (0.01 * (V + 55)) / (1 - $exp(-(V + 55) / 10));
