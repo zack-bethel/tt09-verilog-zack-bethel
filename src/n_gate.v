@@ -1,35 +1,47 @@
-module update_m(
+module update_n(
     input wire clk,             // Clock signal
     input wire reset,           // Reset signal
-    input wire V,          // Membrane potential (in mV)
-    input wire dt,         // Time step (in ms)
-    output real n_next          // Updated gating variable (stored in a register)
+    input wire signed [15:0] V, // Membrane potential (in mV)
+    input wire signed [15:0] dt,// Time step (in ms)
+    output reg signed [15:0] n_next // Updated gating variable
 );
 
     // Internal variables for calculations
-    real alpha_n, beta_n, dn_dt;
-    reg real n_reg;        // Register to store the updated m value
+    reg signed [15:0] alpha_n, beta_n, dn_dt;
+    reg signed [15:0] n_reg; // Register to store the updated n value
+
+    // Initialize n_reg
+    initial begin
+        n_reg = 16'd2; // Initial value for n_reg (0.002 scaled by 1000)
+    end
 
     // Assign output to the register value
-    assign n_next = n_reg;
+    always @(posedge clk or posedge reset) begin
 
-    // Compute alpha_n and beta_n based on membrane potential V
-    always @(posedge clk) begin
-        if (V != -55) begin
-            alpha_n = (0.01 * (V + 55)) / (1 - $exp(-(V + 55) / 10));
-        end else begin
-            alpha_n = 1.0; // Handle singularity at V = -40
-        end
-        beta_n = 0.125 * $exp(-(V + 65) / 80);
-
-        // Compute the derivative of m
-        dn_dt = (alpha_n * (1 - n_reg)) - (beta_n * n_reg);
-
+        //Check for reset very first!
         if (reset) begin
-            n_reg <= 0.002; // Reset m to 0.002 for -65mV resting membrane
+            n_reg <= 16'd2; // Reset n to 0.002 for -65mV resting membrane
         end else begin
-            // Update m_reg using the Euler method
-            n_reg <= n_reg + dn_dt * dt;
+
+            //else, calculate alpha_n!
+            //sepcial case when V= -55mV then we divide by 0
+            if (V != -16'd55) begin
+                alpha_n = (16'd10 * (V + 16'd55)) / (16'd1000 - $exp(-(V + 16'd55) / 16'd10));
+            end else begin
+                alpha_n = 16'd1000; // Handle singularity at V = -55
+            end
+
+            // Calculate Beta_n!
+            beta_n = 16'd125 * $exp(-(V + 16'd65) / 16'd80);
+
+            // Compute the derivative of n
+            dn_dt = (alpha_n * (16'd1000 - n_reg)) - (beta_n * n_reg);
+
+            // Update n_reg using the Euler method
+            n_reg <= n_reg + (dn_dt * dt) / 16'd1000;
         end
     end
+
+    // Assign the updated value to the output
+    assign n_next = n_reg;
 endmodule
