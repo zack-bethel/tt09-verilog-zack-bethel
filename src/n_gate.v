@@ -11,7 +11,7 @@ module update_m(
     reg real n_reg;        // Register to store the updated m value
 
     // Assign output to the register value
-    assign n = n_reg;
+    assign n_next = n_reg;
 
     // Compute alpha_n and beta_n based on membrane potential V
     always @(posedge clk) begin
@@ -24,18 +24,12 @@ module update_m(
 
         // Compute the derivative of m
         dn_dt = (alpha_n * (1 - n_reg)) - (beta_n * n_reg);
-    end
 
-    // Update m_reg on the rising edge of the clock
-    always @(posedge clk or posedge reset) begin
         if (reset) begin
-            n_reg <= 0.0; // Reset m to 0 (or another initial value if specified)
+            n_reg <= 0.002; // Reset m to 0.002 for -65mV resting membrane
         end else begin
             // Update m_reg using the Euler method
             n_reg <= n_reg + dn_dt * dt;
-
-            // Update m to n^4 for equation
-            n_reg <= n_reg * n_reg * n_reg * n_reg;
         end
     end
 endmodule

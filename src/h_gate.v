@@ -18,9 +18,14 @@ module update_h (
 
         // Compute dh/dt: alpha_h * (1 - h) - beta_h * h
         dh_dt = alpha_h * (1.0 - h) - beta_h * h;
-    end
 
-    // Compute h_next as a wire
-    assign h_next = h + dh_dt * dt;
+        // Compute h_next as a wire
+        if (reset) begin
+            m_reg <= 0.60; // Reset m to 0.60 for -65mV resting membrane
+        end else begin
+            // Update h_reg using the Euler method
+            assign h_next = h + dh_dt * dt;
+        end
+    end
 
 endmodule
