@@ -1,27 +1,41 @@
 module sodiumCurrent (
     input wire          clk,
     input wire          rst,
-    input wire [15:0]   V,        // Current membrane potential
-    output reg [15:0]   I_NA    // Next membrane potential (feedback output)
+    wire signed [15:0]  dt,
+    input wire signed [15:0] V,  // Current membrane potential
+    output reg signed [15:0] I_NA // Sodium current
+);
+
+    wire signed [15:0] m, h;
+
+    // Instantiate the update_m and update_h modules
+    update_m m_next (
+        .clk(clk),
+        .reset(rst),
+        .V(V),
+        .dt(dt),
+        .m_next(m)
     );
-    // Internal constants
-    reg [15:0] G_NA, E_NA;
-    wire m, h;
 
-    update_m m_next (.clk(clk), .reset(rst), V.(V), .dt(), .m(m));
-    update_h h_next (.clk(clk), .reset(rst), V.(V), .dt(), .h(h));
+    update_h h_next (
+        .clk(clk),
+        .reset(rst),
+        .V(V),
+        .dt(dt),
+        .h_next(h)
+    );
 
-    // Calculate next membrane potential using discretized equation
+    // Initialize I_NA
+    initial begin
+        I_NA = 16'd0; // Initial value for I_NA
+    end
+
+    // Calculate sodium current using discretized equation
     always @(posedge clk or posedge rst) begin
-
-        // Hodgkin-Huxley constants
-        G_NA <= 120.0;
-        E_NA <= 50.0;
-
         if (rst) begin
-            I_NA <= 0;  // Initial membrane potential
+            I_NA <= 16'd0;  // Reset sodium current
         end else begin
-            I_Na <= G_NA * m * h * (V - E_NA);
+            I_NA <= (16'd1200 * m * m * m * h * (V - 16'd500)) / 16'd10; // Directly use constants and scale result by 10
         end
     end
 endmodule
