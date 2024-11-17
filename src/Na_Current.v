@@ -1,7 +1,7 @@
 module sodiumCurrent (
     input wire          clk,
     input wire          rst,
-    wire signed [15:0]  dt,
+    input wire signed [15:0]  dt,
     input wire signed [15:0] V,  // Current membrane potential
     output reg signed [15:0] I_NA // Sodium current
 );
