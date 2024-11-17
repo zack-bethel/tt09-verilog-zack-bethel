@@ -19,8 +19,12 @@ project:
   source_files:
     - "tt_um_lif_ZB.v"
     - "Lin_HH_ZB.v"
-    - "HH_Membrane.v"
-    - "HH_Gating.v"
+    - "NA_Current.v"
+    - "n_gate.v"
+    - "m_gate.v"
+    - "h_gate.v"
+    - "Leak_Current.v"
+    - "K_Current.v" 
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:

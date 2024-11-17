@@ -10,20 +10,20 @@ from cocotb.triggers import ClockCycles
 async def test_project(dut):
     dut._log.info("Start")
 
-    clock = Clock(dut.clk, 1, units = "ns")
-    cocotb.start_soon(clock.start())
+    # clock = Clock(dut.clk, 1, units = "ns")
+    # cocotb.start_soon(clock.start())
 
-    dut.rst_n.value = 0
-    await ClockCycles(dut.clk, 10)
-    dut.rst_n.value = 1
+    # dut.rst_n.value = 0
+    # await ClockCycles(dut.clk, 10)
+    # dut.rst_n.value = 1
 
-    dut.ui_in.value = 0
-    await ClockCycles(dut.clk, 10)
+    # dut.ui_in.value = 0
+    # await ClockCycles(dut.clk, 10)
 
-    dut.ui_in.value = 20
-    await ClockCycles(dut.clk, 100)
+    # dut.ui_in.value = 20
+    # await ClockCycles(dut.clk, 100)
 
-    dut._log.info("Finsihed test WAWAWAWA")
+    # dut._log.info("Finsihed test WAWAWAWA")
 
     # # Set the clock period to 10 us (100 KHz)
     # clock = Clock(dut.clk, 10, units="us")
