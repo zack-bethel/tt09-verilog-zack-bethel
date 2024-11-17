@@ -21,11 +21,11 @@ module update_m(
             m_reg <= 16'd53; // Reset m to 0.053 for -65mV resting membrane
         end else begin
             if (V != -16'd40) begin
-                alpha_m = (16'd10 * (V + 16'd40)) / (16'd1000 - $exp(-(V + 16'd40) / 16'd10));
+                alpha_m = (16'd10 * (V + 16'd40)) / (16'd1000 - 2^(-(V + 16'd40) / 16'd10));
             end else begin
                 alpha_m = 16'd1000; // Handle singularity at V = -40
             end
-            beta_m = 16'd4000 * $exp(-(V + 16'd65) / 16'd18);
+            beta_m = 16'd4000 * 2^(-(V + 16'd65) / 16'd18);
 
             // Compute the derivative of m
             dm_dt = (alpha_m * (16'd1000 - m_reg)) - (beta_m * m_reg);
