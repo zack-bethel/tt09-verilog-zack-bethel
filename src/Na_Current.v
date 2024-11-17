@@ -35,7 +35,7 @@ module sodiumCurrent (
         if (rst) begin
             I_NA <= 16'd0;  // Reset sodium current
         end else begin
-            I_NA <= (16'd1200 * m * m * m * h * (V - 16'd500)) / 16'd10; // Directly use constants and scale result by 10
+            I_NA <= (16'd1200 * (m * 16'd10) * (m * 16'd10) * (m * 16'd10) * (h * 16'd10) * ((V * 16'd10) - 16'd500)) / 16'd10; // Directly use constants and scale result by 10
         end
     end
 endmodule

@@ -23,7 +23,7 @@ module potassiumCurrent (
             I_K <= 16'd0;      // Reset potassium current
         end else begin
             // I_K = G_K * n^4 * (V - E_K)
-            I_K <= (16'd360 * n * n * n * n * (V - -16'd544)) / 16'd10;
+            I_K <= (16'd360 * (n * 16'd10) * (n * 16'd10) * (n * 16'd10) * (n * 16'd10) * ((V * 16'd10) - 16'd544)) / 16'd10;
         end
     end
 endmodule
