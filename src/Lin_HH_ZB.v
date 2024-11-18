@@ -1,8 +1,8 @@
 module LinearHodgkinHuxleyModel (
     input wire          clock,          // Clock input
     input wire          reset,          // Reset input
-    input wire [8:0]   current_in,     // I (current)
-    input wire [8:0]   dt,             // and dt (time step)
+    input wire [7:0]   current_in,     // I (current)
+    input wire [7:0]   dt,             // and dt (time step)
     output wire         spike
     );
 
