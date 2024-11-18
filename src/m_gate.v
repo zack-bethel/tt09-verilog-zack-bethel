@@ -23,7 +23,7 @@ module update_m(
             if (V != -16'd40) begin
                 alpha_m <= (16'd10 * (V + 16'd40)) / (16'd1000 - 2^(-(V + 16'd40) / 16'd10));
             end else begin
-                alpha_m = 16'd1000; // Handle singularity at V = -40
+                alpha_m <= 16'd1000; // Handle singularity at V = -40
             end
             beta_m = 16'd4000 * 2^(-(V + 16'd65) / 16'd18);
 
