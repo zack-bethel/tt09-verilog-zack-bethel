@@ -12,11 +12,12 @@ module LinearHodgkinHuxleyModel (
     wire [15:0] I_NA, I_K, I_L;
     reg [15:0] V_next, C_M;
     wire [15:0] extended_dt = {8'd0, dt};
+    wire async_reset = reset;
 
     // Currents
-    sodiumCurrent NA (.clk(clock), .rst(reset), .dt(extended_dt), .V(V_next), .I_NA(I_NA));
-    potassiumCurrent K (.clk(clock), .rst(reset), .dt(extended_dt), .V(V_next), .I_K(I_K));
-    leakCurrent L (.clk(clock), .rst(reset), .V(V_next), .I_L(I_L));
+    sodiumCurrent NA (.clk(clock), .rst(async_reset), .dt(extended_dt), .V(V_next), .I_NA(I_NA));
+    potassiumCurrent K (.clk(clock), .rst(async_reset), .dt(extended_dt), .V(V_next), .I_K(I_K));
+    leakCurrent L (.clk(clock), .rst(async_reset), .V(V_next), .I_L(I_L));
 
     // Calculate next membrane potential using discretized equation
     always @(posedge clock) begin
