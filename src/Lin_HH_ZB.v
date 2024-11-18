@@ -9,9 +9,15 @@ module LinearHodgkinHuxleyModel (
     reg [7:0] threshold;
 
     // Internal Wires
-    wire I_NA, I_K, I_L, I_tot, V_membrane, dt_time;
-    reg V_next, C_M;
+    wire I_NA, I_K, I_L, I_tot, dt_time;
+    wire [15:0] V_membrane;
+    reg [15:0] V_next, C_M;
 
+    assign V_membrane = V_next;
+    // Initialize V
+    initial begin
+        V_next = 16'd-65; // Initial value for I_NA
+    end
     // Currents
     sodiumCurrent NA (.clk(clock), .rst(reset), .dt(dt), .V(V_membrane), .I_NA(I_NA));
     potassiumCurrent K (.clk(clock), .rst(reset), .dt(dt), .V(V_membrane), .I_K(I_K));
