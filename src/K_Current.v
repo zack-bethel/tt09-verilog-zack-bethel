@@ -1,7 +1,7 @@
 module potassiumCurrent (
     input wire                  clk,
     input wire                  rst,
-    input wire                  dt,
+    input wire [15:0]           dt,
     input wire signed [15:0]    V,  // Current membrane potential
     output reg signed [15:0]    I_K // Potassium current
 );

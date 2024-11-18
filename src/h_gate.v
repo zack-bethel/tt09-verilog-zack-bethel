@@ -2,7 +2,7 @@ module update_h (
     input wire clk,             // Clock signal
     input wire reset,           // Reset signal
     input wire signed [15:0] V, // Membrane potential (in mV)
-    input wire signed [15:0] dt,// Time step (in ms)
+    input wire [15:0] dt,// Time step (in ms)
     output reg signed [15:0] h_next // Updated gating variable value
 );
 
