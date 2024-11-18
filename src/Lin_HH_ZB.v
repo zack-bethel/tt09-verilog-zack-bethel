@@ -9,8 +9,7 @@ module LinearHodgkinHuxleyModel (
     reg [7:0] threshold;
 
     // Internal Wires
-    wire I_NA, I_K, I_L, I_tot, dt_time;
-    wire [15:0] V_membrane;
+    wire [15:0] I_NA, I_K, I_L, I_tot;
     reg [15:0] V_next, C_M;
     
     // Currents
