@@ -25,10 +25,10 @@ module update_m(
             end else begin
                 alpha_m <= 16'd1000; // Handle singularity at V = -40
             end
-            beta_m = 16'd4000 * 2^(-(V + 16'd65) / 16'd18);
+            beta_m <= 16'd4000 * 2^(-(V + 16'd65) / 16'd18);
 
             // Compute the derivative of m
-            dm_dt = (alpha_m * (16'd1000 - m_reg)) - (beta_m * m_reg);
+            dm_dt <= (alpha_m * (16'd1000 - m_reg)) - (beta_m * m_reg);
 
             // Update m_reg using the Euler method
             m_reg <= m_reg + (dm_dt * dt) / 16'd1000;

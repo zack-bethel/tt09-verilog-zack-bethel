@@ -26,16 +26,16 @@ module update_n(
             //else, calculate alpha_n!
             //sepcial case when V= -55mV then we divide by 0
             if (V != -16'd55) begin
-                alpha_n = (16'd10 * (V + 16'd55)) / (16'd1000 - 2^(-(V + 16'd55) / 16'd10));
+                alpha_n <= (16'd10 * (V + 16'd55)) / (16'd1000 - 2^(-(V + 16'd55) / 16'd10));
             end else begin
-                alpha_n = 16'd1000; // Handle singularity at V = -55
+                alpha_n <= 16'd1000; // Handle singularity at V = -55
             end
 
             // Calculate Beta_n!
-            beta_n = 16'd125 * 2^(-(V + 16'd65) / 16'd80);
+            beta_n <= 16'd125 * 2^(-(V + 16'd65) / 16'd80);
 
             // Compute the derivative of n
-            dn_dt = (alpha_n * (16'd1000 - n_reg)) - (beta_n * n_reg);
+            dn_dt <= (alpha_n * (16'd1000 - n_reg)) - (beta_n * n_reg);
 
             // Update n_reg using the Euler method
             n_reg <= n_reg + (dn_dt * dt) / 16'd1000;
