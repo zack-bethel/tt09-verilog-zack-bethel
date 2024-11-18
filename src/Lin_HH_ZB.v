@@ -6,7 +6,7 @@ module LinearHodgkinHuxleyModel (
     output wire         spike
     );
 
-    reg [7:0] threshold;
+    reg [15:0] threshold;
 
     // Internal Wires
     wire [15:0] I_NA, I_K, I_L, I_tot;
