@@ -28,7 +28,8 @@ module tb ();
 `endif
 
   // Replace tt_um_example with your module name:
-  tt_um_lif_ZB_copy user_project (
+  // tt_um_lif_ZB_copy user_project ( //Example LIF neuron
+  tt_um_lif_ZB user_project ( //HH neuron
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
