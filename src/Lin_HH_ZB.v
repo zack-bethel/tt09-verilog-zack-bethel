@@ -1,20 +1,21 @@
 module LinearHodgkinHuxleyModel (
     input wire          clock,          // Clock input
     input wire          reset,          // Reset input
-    input wire [15:0]   current_in,     // I (current)
-    input wire [15:0]   dt,             // and dt (time step)
+    input wire [8:0]   current_in,     // I (current)
+    input wire [8:0]   dt,             // and dt (time step)
     output wire         spike
     );
 
     reg [15:0] threshold;
 
     // Internal Wires
-    wire [15:0] I_NA, I_K, I_L, I_tot;
+    wire [15:0] I_NA, I_K, I_L;
     reg [15:0] V_next, C_M;
-    
+    wire [15:0] extended_dt = {8'd0, dt};
+
     // Currents
-    sodiumCurrent NA (.clk(clock), .rst(reset), .dt(dt), .V(V_next), .I_NA(I_NA));
-    potassiumCurrent K (.clk(clock), .rst(reset), .dt(dt), .V(V_next), .I_K(I_K));
+    sodiumCurrent NA (.clk(clock), .rst(reset), .dt(extended_dt), .V(V_next), .I_NA(I_NA));
+    potassiumCurrent K (.clk(clock), .rst(reset), .dt(extended_dt), .V(V_next), .I_K(I_K));
     leakCurrent L (.clk(clock), .rst(reset), .V(V_next), .I_L(I_L));
 
     // Calculate next membrane potential using discretized equation
