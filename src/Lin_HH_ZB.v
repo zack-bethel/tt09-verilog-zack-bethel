@@ -26,7 +26,7 @@ module LinearHodgkinHuxleyModel (
       if (reset) begin
               V_next <= -65;  // Initial membrane potential
           end else begin
-            V_next <= V_next + dt * (current_in - (I_NA + I_K + I_L)) / C_M;
+            V_next <= V_next + dt * ({8'd0, current_in} - (I_NA + I_K + I_L)) / C_M;
           end
       end
 
