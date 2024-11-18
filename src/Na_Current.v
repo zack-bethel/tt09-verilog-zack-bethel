@@ -6,7 +6,8 @@ module sodiumCurrent (
     output reg signed [15:0] I_NA // Sodium current
 );
 
-    wire signed [15:0] m, h;
+    wire signed [15:0] m;
+    wire signed [15:0] h;
 
     // Instantiate the update_m and update_h modules
     update_m m_updater (
