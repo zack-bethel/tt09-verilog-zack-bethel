@@ -9,7 +9,7 @@ module potassiumCurrent (
     wire signed [15:0] n;
 
     // Instantiate the update_n module
-    update_n n_next (
+    update_n n_updator (
         .clk(clk),
         .reset(rst),
         .V(V),

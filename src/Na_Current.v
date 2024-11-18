@@ -9,7 +9,7 @@ module sodiumCurrent (
     wire signed [15:0] m, h;
 
     // Instantiate the update_m and update_h modules
-    update_m m_next (
+    update_m m_updater (
         .clk(clk),
         .reset(rst),
         .V(V),
@@ -17,7 +17,7 @@ module sodiumCurrent (
         .m_next(m)
     );
 
-    update_h h_next (
+    update_h h_updator (
         .clk(clk),
         .reset(rst),
         .V(V),
