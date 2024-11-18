@@ -20,7 +20,7 @@ module LinearHodgkinHuxleyModel (
     // Calculate next membrane potential using discretized equation
     always @(posedge clock) begin
 
-          C_M <= ;
+          C_M <= 1000;
           threshold <= 16'd30;
       if (reset) begin
               V_next <= -65;  // Initial membrane potential

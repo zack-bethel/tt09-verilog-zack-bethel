@@ -11,7 +11,7 @@ module lif(
 
     wire [7:0] next_state;
     reg [7:0] threshold;
-    reg [7:0] beta;
+    // reg [7:0] beta;
 
     always @(posedge clk) begin
         
@@ -25,8 +25,8 @@ module lif(
     end
 
     // assign next state
-    assign next_state = current + beta*state
-    // assign next_state = current + (state >> 1);
+    // assign next_state = current + beta*state
+    assign next_state = current + (state >> 1);
     // assign next_state = current + (spk ? 0 : (state >> 1));
 
     //spiking logic
